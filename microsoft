@@ -1,0 +1,21 @@
+You are given an array of non-negative integers arr and a start index. When you are at an index i, you can move left or right by arr[i].
+Your task is to figure out if you can reach value 0.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+class Solution {
+    public boolean canReach(int[] arr, int start) {
+        boolean[] visited = new boolean[arr.length];
+        return canReach(arr, start, visited);
+    }
+    
+    private boolean canReach(int[] arr, int start, boolean[] visited) {
+        var x = arr[start];
+        if(arr[start] == 0) return true;
+        if(!visited[start]){
+            visited[start] = true;
+            if(start - arr[start] >= 0 && canReach(arr, start - arr[start], visited)) return true;
+            if(start + arr[start] <= arr.length - 1 && canReach(arr, start + arr[start], visited)) return true ;
+        }
+        return false;
+    }
+}
